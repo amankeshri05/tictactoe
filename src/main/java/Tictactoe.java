@@ -1,14 +1,16 @@
-import java.util.Scanner;
 public class Tictactoe {
+    static char[][] board = {
+            {'-', '-', '-'},
+            {'-', '-', '-'},
+            {'-', '-', '-'}
+    };
     public static void main(String[] args) {
-        int slot = 7;
-        System.out.println("Row: " + getRowFromSlot(slot));
-        System.out.println("Column: " + getColFromSlot(slot));
+        System.out.println(isValidMove(1, 1));
     }
-    static int getRowFromSlot(int slot) {
-        return (slot - 1) / 3;
-    }
-    static int getColFromSlot(int slot) {
-        return (slot - 1) % 3;
+    static boolean isValidMove(int row, int col) {
+        return (row >= 0 && row < 3 &&
+                col >= 0 && col < 3 &&
+                board[row][col] == '-');
     }
 }
+
