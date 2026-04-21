@@ -1,39 +1,18 @@
-import java.util.Random;
+import java.util.Scanner;
 public class Tictactoe {
-    static char userSymbol;
-    static char computerSymbol;
-    static String currentPlayer;
-
     public static void main(String[] args) {
-        tossToDecide();
-        displayGameInfo();
+        int slot = getUserInput();
+        System.out.println("You selected slot: " + slot);
     }
-
-    // Method to perform toss
-    public static void tossToDecide() {
-        Random random = new Random();
-
-        // 0 -> User starts, 1 -> Computer starts
-        int toss = random.nextInt(2);
-
-        if (toss == 0) {
-            currentPlayer = "User";
-            userSymbol = 'X';
-            computerSymbol = 'O';
-        } else {
-            currentPlayer = "Computer";
-            computerSymbol = 'X';
-            userSymbol = 'O';
+    public static int getUserInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a slot number (1-9): ");
+        int slot = sc.nextInt();
+        while (slot < 1 || slot > 9) {
+            System.out.print("Invalid input! Enter number between 1-9: ");
+            slot = sc.nextInt();
         }
-    }
 
-    // Method to display result
-    public static void displayGameInfo() {
-        System.out.println("Toss Result:");
-        System.out.println(currentPlayer + " will start first.");
-
-        System.out.println("User Symbol: " + userSymbol);
-        System.out.println("Computer Symbol: " + computerSymbol);
+        return slot;
     }
 }
-
