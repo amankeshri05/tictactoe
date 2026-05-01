@@ -1,43 +1,24 @@
 public class Tictactoe {
-    public static boolean checkWin(char[][] board, char symbol) {
+    public static boolean isDraw(char[][] board) {
         for (int i = 0; i < 3; i++) {
-            if (board[i][0] == symbol &&
-                    board[i][1] == symbol &&
-                    board[i][2] == symbol) {
-                return true;
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == ' ') {
+                    return false;
+                }
             }
         }
-        for (int j = 0; j < 3; j++) {
-            if (board[0][j] == symbol &&
-                    board[1][j] == symbol &&
-                    board[2][j] == symbol) {
-                return true;
-            }
-        }
-        if (board[0][0] == symbol &&
-                board[1][1] == symbol &&
-                board[2][2] == symbol) {
-            return true;
-        }
-        if (board[0][2] == symbol &&
-                board[1][1] == symbol &&
-                board[2][0] == symbol) {
-            return true;
-        }
-        return false; // No win found
+        return true;
     }
     public static void main(String[] args) {
         char[][] board = {
-                {'X', 'X', 'X'},
-                {'O', ' ', 'O'},
-                {' ', ' ', ' '}
+                {'X', 'O', 'X'},
+                {'X', 'O', 'O'},
+                {'O', 'X', 'X'}
         };
-        if (checkWin(board, 'X')) {
-            System.out.println("Player X Wins!");
-        } else if (checkWin(board, 'O')) {
-            System.out.println("Player O Wins!");
+        if (isDraw(board)) {
+            System.out.println("It's a Draw!");
         } else {
-            System.out.println("No Winner Yet.");
+            System.out.println("Game still in progress.");
         }
     }
 }
