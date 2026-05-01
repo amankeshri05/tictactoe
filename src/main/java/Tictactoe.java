@@ -1,7 +1,14 @@
-import java.util.Scanner;
+import java.util.Random;
 public class Tictactoe {
+    public static boolean placeMove(char[][] board, int row, int col, char symbol) {
+        if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
+            board[row][col] = symbol;
+            return true;
+        }
+        return false;
+    }
     public static void displayBoard(char[][] board) {
-        System.out.println("\nCurrent Board:");
+        System.out.println("\nBoard:");
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 System.out.print(board[i][j]);
@@ -11,35 +18,26 @@ public class Tictactoe {
             if (i < 2) System.out.println("--+---+--");
         }
     }
-    // UC6: Place Move on Board
-    public static boolean placeMove(char[][] board, int row, int col, char symbol) {
-        // Check valid move
-        if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
-            board[row][col] = symbol;  // State update
-            return true;
-        } else {
-            System.out.println("Invalid move! Try again.");
-            return false;
+    public static void computerMove(char[][] board, char computerSymbol) {
+        Random rand = new Random();
+        boolean movePlaced = false;
+        while (!movePlaced) {
+            int slot = rand.nextInt(9) + 1; // 1–9
+            int row = (slot - 1) / 3;
+            int col = (slot - 1) % 3;
+            movePlaced = placeMove(board, row, col, computerSymbol);
         }
+        System.out.println("\nComputer placed its move.");
     }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
         char[][] board = {
                 {' ', ' ', ' '},
                 {' ', ' ', ' '},
                 {' ', ' ', ' '}
         };
-        char symbol = 'X'; // Example player
+        char computerSymbol = 'O';
         displayBoard(board);
-        System.out.print("\nEnter row (0-2): ");
-        int row = sc.nextInt();
-        System.out.print("Enter column (0-2): ");
-        int col = sc.nextInt();
-        if (placeMove(board, row, col, symbol)) {
-            System.out.println("\nMove placed successfully!");
-        }
+        computerMove(board, computerSymbol);
         displayBoard(board);
-        sc.close();
     }
 }
